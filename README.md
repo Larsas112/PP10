@@ -56,7 +56,9 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **What does `typedef struct { ... } Point;` achieve compared to `struct Point { ... };`?**
-2. **How does the compiler lay out a `Point` in memory?**
+   Durch den typedef wird der Datentyp Point ähnlich wie int intergriert, wodurch er einfach einsetzbar wird. Ohne typedef muss die Variable trotz vor konfiguration zunächst als struct deklariert werden.
+3. **How does the compiler lay out a `Point` in memory?**
+   Im Arbeitsspeicher sollte die Variable als zusammenhängender array gestacked.
 
 ---
 
@@ -74,8 +76,9 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **Why is the `-lm` flag necessary to resolve `sqrt`?**
-2. **What happens if you omit `-lm` when calling math functions?**
-
+   Da allein durch das includieren kein bezug zum ablageort der library entsteht, wird dies zusätzlich im linker erwähnt.
+3. **What happens if you omit `-lm` when calling math functions?**
+   egal welchen Part man vergisst, so wird die sqrt funktion nicht erkannt und gibt eine fehlermeldung aus.
 ---
 
 ### Task 2: Header-Only Library
@@ -105,7 +108,9 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **What are the advantages and drawbacks of a header-only library?**
-2. **How does `static inline` affect linkage and code size?**
+   Die deklarierung innerhalb der Library ist sehr aufwendig und gibt nicht viel platz für fehler. Dafür ist die implementieren sehr identisch zur Programmierung.
+3. **How does `static inline` affect linkage and code size?**
+inline bedeutet zunächst, dass die funktion als solche an der aufruf stelle eingefügt wird, nicht aufgerufen wie eine funktion, allerdings wird dennoch eine externe variable dabei zurückgegeben, die muss dann vom linker verknüft werden, oder es wird durch static eine interne Variable erzwungen.
 
 ---
 
