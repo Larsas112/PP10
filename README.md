@@ -112,7 +112,7 @@ In this exercise you will:
 3. **How does `static inline` affect linkage and code size?**
 inline bedeutet zunächst, dass die funktion als solche an der aufruf stelle eingefügt wird, nicht aufgerufen wie eine funktion, allerdings wird dennoch eine externe variable dabei zurückgegeben, die muss dann vom linker verknüft werden, oder es wird durch static eine interne Variable erzwungen.
 
----
+   ---
 
 ### Task 3: Precompiled Static Library
 
@@ -134,7 +134,9 @@ inline bedeutet zunächst, dass die funktion als solche an der aufruf stelle ein
 #### Reflection Questions
 
 1. **Why must you include `solutions/util.o` when linking instead of just the header?**
+   Unter WSL scheint, diese Linkung nicht nötig zu sein, ich würde aber darauf schließen, dass Linux die .o ohne linkung nicht integrieren kann, der Header .h hat dagegen nämlich die eigenschaft, dass er stumpf vor dem programm ausgeführt wird, währen die .o erst vom Programm aufgerufen wird. Dies geschieht jedesmal wenn eine funktion eus dieser Dati verwendet wird.
 2. **What symbol resolution occurs at compile vs. link time?**
+   es werden ausschließlich lokale variablen erstellt und aufgerufen, in der link time wird nach den nicht im Programm deklarierten Funktionen in dern verlinkten dateien gesucht.
 
 ---
 
@@ -165,8 +167,9 @@ inline bedeutet zunächst, dass die funktion als solche an der aufruf stelle ein
 #### Reflection Questions
 
 1. **How does `ar` create an archive, and how does the linker find `-lutil`?**
+   ar ist eine funktion, die ein archiv erstellen und bearbeiten kann. In diesem archiv können mehrere einzelne dateien (primär objekt dateien) struktoriert werden, mit name, timstamp und besitzer werden die Dateien referenziert.
 2. **What is the purpose of `ldconfig`?**
-
+   ldconfig verlinkt alle kürzlich hinzugefügten libraries, dies geschieht basierend auf dem cache und eine durchsuchung der typischen directories, wo diese gespeichert werden.
 ---
 
 ### Task 5: Installing and Using `jansson`
@@ -202,7 +205,9 @@ inline bedeutet zunächst, dass die funktion als solche an der aufruf stelle ein
 #### Reflection Questions
 
 1. **What files does `libjansson-dev` install, and where?**
+Es werden jansson.h -.pc und -_config.h im usr/include ordner.
 2. **How does the linker know where to find `-ljansson`?**
+Da die datei im gleichen ordner liegt, wie die alle anderen libraries, scheint der linker einmal exakt diese Liste zu durchsuchen.
 
 ---
 
